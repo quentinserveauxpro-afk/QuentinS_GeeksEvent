@@ -23,7 +23,7 @@
 - Nom de scène
 
 ## Évènement
-(ManyToOne => Organisateur)
+(ManyToOne => Organisateur | ManyToMany => Activité)
 - Nom
 - Type
 - Date
@@ -32,13 +32,13 @@
 - Adresse
 
 ## Profil
-(OneToOne => Utilisateur)
+(OneToOne => Utilisateur | ManyToMany => Activité)
 - Photo de profil
 - Bio
 - Préférences
 
 ## Activité
-(ManyToMany => Participant)
+(ManyToMany => Évènement, Profil)
 - Nom
 - Description
 - Lieu
