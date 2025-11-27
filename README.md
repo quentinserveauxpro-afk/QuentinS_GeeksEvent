@@ -8,7 +8,6 @@
 
 ## Participant
 // Hérite d'Utilisateur //
-(ManyToMany => Activités)
 - Pseudo
 - Adresse
 - Date de naissance
