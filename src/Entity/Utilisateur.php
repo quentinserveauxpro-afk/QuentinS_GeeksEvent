@@ -4,9 +4,20 @@ namespace App\Entity;
 
 use App\Repository\UtilisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Intervenant;
+use App\Entity\Organisateur;
+use App\Entity\Participant;
 
 #[ORM\Entity(repositoryClass: UtilisateurRepository::class)]
-#[ORM\InheritanceType('JOINED')]
+#[ORM\InheritanceType('SINGLE_TABLE')]
+#[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
+#[ORM\DiscriminatorMap([
+    'utilisateur' => Utilisateur::class,
+    'intervenant' => Intervenant::class, 
+    'participant' => Participant::class,
+    'organisateur' => Organisateur::class
+    ])]
+    
 abstract class Utilisateur
 {
     #[ORM\Id]

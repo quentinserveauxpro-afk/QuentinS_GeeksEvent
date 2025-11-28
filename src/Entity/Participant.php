@@ -6,7 +6,7 @@ use App\Repository\EvenementRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: EvenementRepository::class)]
+#[ORM\Entity]
 class Participant extends Utilisateur
 {
     #[ORM\Column(length: 255)]
