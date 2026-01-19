@@ -1,3 +1,71 @@
 body {
-    background-color: skyblue;
+    background: linear-gradient(to bottom, #BB001A 55%, #FF8798 100%) no-repeat fixed;
+    min-height: 100vh;
+
+}
+
+/* Couleurs et Structure */
+.registration-card {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 40px;
+    overflow: hidden;
+    border: none;
+}
+
+.card-header-custom {
+    background-color: #FFC9D2;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    font-family: 'Arial Black', sans-serif;
+}
+
+.card-body-custom {
+    background-color: #FFC9D2;
+    padding: 30px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+/* Labels */
+.form-label-custom {
+    color: #555;
+    font-weight: 500;
+    margin-left: 15px;
+    margin-bottom: 2px;
+}
+
+/* Champs de saisie (Inputs) */
+.custom-input {
+    border: 2px solid black !important;
+    border-radius: 50px !important;
+    background-color: transparent !important;
+    padding: 10px 20px;
+}
+
+.custom-input:focus {
+    box-shadow: none;
+    background-color: #fff !important;
+}
+
+/* Bouton Inscription */
+.btn-inscription {
+    background-color: black !important;
+    color: white !important;
+    border-radius: 50px !important;
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: none;
+}
+
+.btn-inscription:hover {
+    background-color: #333 !important;
+}
+
+/* Lien se connecter */
+.login-link {
+    font-size: 0.9rem;
+    font-weight: 500;
 }

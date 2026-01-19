@@ -43,10 +43,6 @@ class IntervenantType extends AbstractType
                 'label' => 'Nom de scène',
                 'attr' => ['maxlength ' => 255]
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Enregistrer',
-                'attr' => ['class' => 'btn btn-primary']
-            ])
         ;
     }
 
