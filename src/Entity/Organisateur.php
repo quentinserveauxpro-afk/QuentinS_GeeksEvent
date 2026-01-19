@@ -14,12 +14,6 @@ class Organisateur extends Utilisateur
     #[ORM\Column(length: 14)]
     private ?string $siret = null;
 
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column]
-    private ?string $password = null;
-
     public function getSiret(): ?string
     {
         return $this->siret;

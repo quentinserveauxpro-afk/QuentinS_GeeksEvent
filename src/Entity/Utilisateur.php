@@ -13,7 +13,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\DiscriminatorMap([
     'utilisateur' => 'Utilisateur', 
     'organisateur' => 'Organisateur',
-    'intervenant' => 'Intervenant'
+    'intervenant' => 'Intervenant',
+    'participant' => 'Participant'
     ])]
 
 class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
