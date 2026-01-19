@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\EvenementRepository;
+use App\Repository\ParticipantRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: ParticipantRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class Participant extends Utilisateur
 {
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $pseudo = null;
 
     #[ORM\Column(length: 255)]
@@ -23,9 +26,11 @@ class Participant extends Utilisateur
         return $this->pseudo;
     }
 
-    public function setPseudo(?string $pseudo): void
+    public function setPseudo(string $pseudo): static
     {
         $this->pseudo = $pseudo;
+
+        return $this;
     }
 
     public function getAdresse(): ?string
@@ -33,9 +38,11 @@ class Participant extends Utilisateur
         return $this->adresse;
     }
 
-    public function setAdresse(?string $adresse): void
+    public function setAdresse(string $adresse): static
     {
         $this->adresse = $adresse;
+
+        return $this;
     }
 
     public function getDateDeNaissance(): ?\DateTime
@@ -43,8 +50,10 @@ class Participant extends Utilisateur
         return $this->dateDeNaissance;
     }
 
-    public function setDateDeNaissance(?\DateTime $dateDeNaissance): void
+    public function setDateDeNaissance(\DateTime $dateDeNaissance): static
     {
         $this->dateDeNaissance = $dateDeNaissance;
+
+        return $this;
     }
 }

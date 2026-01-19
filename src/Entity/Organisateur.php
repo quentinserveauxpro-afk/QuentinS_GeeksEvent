@@ -2,72 +2,33 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Repository\OrganisateurRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: OrganisateurRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class Organisateur extends Utilisateur
 {
-    #[ORM\Column(type: 'string', length: 14, unique: true)]
-    private $siret;
+    #[ORM\Column(length: 14)]
+    private ?string $siret = null;
 
     /**
-     * @var Collection<int, Evenement>
+     * @var string The hashed password
      */
-    #[ORM\OneToMany(targetEntity: Evenement::class, mappedBy: 'organisateur')]
-    private Collection $evenement;
+    #[ORM\Column]
+    private ?string $password = null;
 
-    public function __construct()
-    {
-        $this->evenement = new ArrayCollection();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSiret()
+    public function getSiret(): ?string
     {
         return $this->siret;
     }
 
-    /**
-     * @param mixed $siret
-     */
-    public function setSiret($siret): void
+    public function setSiret(string $siret): static
     {
         $this->siret = $siret;
-    }
-
-    /**
-     * @return Collection<int, Evenement>
-     */
-    public function getEvenement(): Collection
-    {
-        return $this->evenement;
-    }
-
-    public function addEvenement(Evenement $evenement): static
-    {
-        if (!$this->evenement->contains($evenement)) {
-            $this->evenement->add($evenement);
-            $evenement->setOrganisateur($this);
-        }
 
         return $this;
     }
-
-    public function removeEvenement(Evenement $evenement): static
-    {
-        if ($this->evenement->removeElement($evenement)) {
-            // set the owning side to null (unless already changed)
-            if ($evenement->getOrganisateur() === $this) {
-                $evenement->setOrganisateur(null);
-            }
-        }
-
-        return $this;
-    }
-
 }

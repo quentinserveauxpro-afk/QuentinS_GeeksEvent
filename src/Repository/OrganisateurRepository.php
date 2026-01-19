@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Utilisateur;
+use App\Entity\Organisateur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -10,13 +10,13 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
- * @extends ServiceEntityRepository<Utilisateur>
+ * @extends ServiceEntityRepository<Organisateur>
  */
-class UtilisateurRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
+class OrganisateurRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Utilisateur::class);
+        parent::__construct($registry, Organisateur::class);
     }
 
     /**
@@ -24,7 +24,7 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
-        if (!$user instanceof Utilisateur) {
+        if (!$user instanceof Organisateur) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
@@ -34,24 +34,24 @@ class UtilisateurRepository extends ServiceEntityRepository implements PasswordU
     }
 
     //    /**
-    //     * @return Utilisateur[] Returns an array of Utilisateur objects
+    //     * @return Organisateur[] Returns an array of Organisateur objects
     //     */
     //    public function findByExampleField($value): array
     //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
     //            ->setParameter('val', $value)
-    //            ->orderBy('u.id', 'ASC')
+    //            ->orderBy('o.id', 'ASC')
     //            ->setMaxResults(10)
     //            ->getQuery()
     //            ->getResult()
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Utilisateur
+    //    public function findOneBySomeField($value): ?Organisateur
     //    {
-    //        return $this->createQueryBuilder('u')
-    //            ->andWhere('u.exampleField = :val')
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
     //            ->setParameter('val', $value)
     //            ->getQuery()
     //            ->getOneOrNullResult()
