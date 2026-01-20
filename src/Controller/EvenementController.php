@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,13 +16,40 @@ use Symfony\Component\Routing\Attribute\Route;
 final class EvenementController extends AbstractController
 {
     #[Route(name: 'app_evenement_index', methods: ['GET'])]
-    public function index(EvenementRepository $evenementRepository): Response
+    public function index(Request $request, EvenementRepository $repo): Response
     {
+        $form = $this->createFormBuilder(null, ['method' => 'GET'])
+            ->add('search', SearchType::class,[
+                'required' => false,
+                'label' => 'Filtre',
+                'attr' => ['placeholder' => 'Chercher un évènement'],
+            ])
+            ->getForm();
+
+            $form->handleRequest($request);
+
+            $qb = $repo->createQueryBuilder('e');
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $search = $form->get('search')->getData();
+                if ($search) {
+                    $qb->andWhere('e.nom LIKE :search
+                                           OR e.type LIKE :search
+                                           OR e.localisation LIKE :search
+                                           OR e.organisateur LIKE :search')
+                        ->setParameter('search', '%' . $search . '%');
+                }
+            } 
+
+            $evenements = $qb->getQuery()->getResult();
+
         return $this->render('evenement/index.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
+            'evenements' => $repo->findAll(),
+            'form' => $form,
         ]);
     }
 
+    /* #[Route(name: 'app_evenement_index', methods: ['GET'])]
     public function search(Request $request, EvenementRepository $repo): Response
     {
         $form = $this->createForm(EvenementType::class);
@@ -46,7 +74,7 @@ final class EvenementController extends AbstractController
             'evenements' => $evenements,
             'form' => $form,
         ]);
-    }
+    } */
 
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
@@ -64,7 +92,7 @@ final class EvenementController extends AbstractController
 
         return $this->render('evenement/new.html.twig', [
             'evenement' => $evenement,
-            'form1' => $form,
+            'form' => $form,
         ]);
     }
 

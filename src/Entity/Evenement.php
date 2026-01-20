@@ -141,24 +141,23 @@ class Evenement
     /**
      * @return Collection<int, Activite>
      */
-    public function getActivités(): Collection
+    public function getActivites(): Collection
     {
-        return $this->activités;
+        return $this->activites;
     }
 
-    public function addActivit(Activite $activit): static
+    public function addActivites(Activite $activite): static
     {
-        if (!$this->activités->contains($activit)) {
-            $this->activités->add($activit);
+        if (!$this->activites->contains($activite)) {
+            $this->activites->add($activite);
         }
 
         return $this;
     }
 
-    public function removeActivit(Activite $activit): static
+    public function removeActivit(Activite $activite): static
     {
-        $this->activités->removeElement($activit);
-
+        $this->activites->removeElement($activite);
         return $this;
     }
 }
