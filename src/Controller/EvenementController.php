@@ -22,6 +22,32 @@ final class EvenementController extends AbstractController
         ]);
     }
 
+    public function search(Request $request, EvenementRepository $repo): Response
+    {
+        $form = $this->createForm(EvenementType::class);
+        $form->handleRequest($request);
+
+        $qb = $repo->createQueryBuilder('e');
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->get('search')->getData();
+            if ($search) {
+                $qb->andWhere('e.nom LIKE :search
+                                       OR e.type LIKE :search
+                                       OR e.localisation LIKE :search
+                                       OR e.organisateur LIKE :search')
+                    ->setParameter('search', '%' . $search . '%');
+            }
+        }
+
+        $evenements = $qb->getQuery()->getResult();
+
+        return $this->render('evenement/index.html.twig', [
+            'evenements' => $evenements,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/new', name: 'app_evenement_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -38,9 +64,10 @@ final class EvenementController extends AbstractController
 
         return $this->render('evenement/new.html.twig', [
             'evenement' => $evenement,
-            'form' => $form,
+            'form1' => $form,
         ]);
     }
+
 
     #[Route('/{id}', name: 'app_evenement_show', methods: ['GET'])]
     public function show(Evenement $evenement): Response
