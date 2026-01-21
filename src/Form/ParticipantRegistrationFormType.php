@@ -23,6 +23,7 @@ class ParticipantRegistrationFormType extends AbstractType
             ])
             ->add('email')
             ->add('pseudo')
+            ->add('adresse')
             ->add('dateDeNaissance')
             ->add('agreeTerms', CheckboxType::class, [
                                 'mapped' => false,
