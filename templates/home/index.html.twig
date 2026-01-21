@@ -8,39 +8,33 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-    <div class="container">
-        <h1 class="mt-4" style="font-family: Bungee; color: white;">Bienvenue sur notre plateforme</h1>
-        <p style="color: lightgrey;">Sélectionnez votre type d'utilisateur pour continuer :</p>
+    <div class="container text-center p-5">
 
-        <h2>Inscrivez-vous</h2>
+        <section>
+            <h1 class="mt-4" style="font-family: Bungee; color: white;">Bienvenue sur notre plateforme</h1>
+            <p style="color: lightgrey; font-family: Ubuntu; font-weight: regular;">Sélectionnez votre type d'utilisateur pour continuer, ou connectez-vous :</p>
 
-        <div>
-            <button>
-                <a href="{{ path('app_register_participant') }}">Participant</a>
-            </button>
-        </div>
+            <h2 class="mt-4" style="font-family: Ubuntu; font-weight: medium; color: white;">Inscrivez-vous</h2>
 
-        <div>
-            <button>
-                <a href="{{ path('app_register_intervenant') }}">Intervenant</a>
-            </button>
-        </div>
+            <div class="my-3">
+                <a class="btn btn-lg btn-info" href="{{ path('app_register_participant') }}">Participant</a>
+            </div>
 
-        <div>
-            <button>
-                <a href="{{ path('app_register_organisateur') }}">Organisateur</a>
-            </button>
-        </div>
+            <div class="my-3">
+                <a class="btn btn-lg btn-success" href="{{ path('app_register_intervenant') }}">Intervenant</a>
+            </div>
+
+            <div class="my-3">
+                <a class="btn btn-lg btn-warning" href="{{ path('app_register_organisateur') }}">Organisateur</a>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="my-4" style="font-family: Ubuntu; font-weight: medium; color: white;">Connectez-vous</h2>
+
+            <a class="btn btn-lg btn-dark" href="{{ path('app_login') }}">Se connecter</a>
+        </section>
+        
     </div>
 
-    <div class="container mt-5">
-
-        <h2>Connectez-vous</h2>
-
-        <div>
-            <button>
-                <a href="{{ path('app_login') }}">Se connecter</a>
-            </button>
-        </div>
-    </div>
-{% endblock %}
+    {% endblock %}

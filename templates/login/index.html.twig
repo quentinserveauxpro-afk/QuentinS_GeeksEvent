@@ -7,17 +7,28 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <h1>Ravi de vous revoir!</h1>
+    <div class="container-sm text-center p-3">
 
-    <form action="{{ path('app_login') }}" method="post">
-        <label for="username">Email:</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" required>
+        <h1 class="my-5" style="font-family: Bungee; color: rgb(255, 255, 255);">Ravi de vous revoir!</h1>
+    
+        <form action="{{ path('app_login') }}" method="post">
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password" required>
+            <div class="col-md-4 d-grid gap-2 mx-auto">
+                <label for="username" class="form-label" style="color: #FFFFFF; font-family: Ubuntu;">Email:</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" required>
+        
+                <label for="password" class="form-label" style="color: #FFFFFF; font-family: Ubuntu;">Password:</label>
+                <input type="password" id="password" name="_password" class="form-control" required>
+        
+                <input type="hidden" name="_target_path" value="/evenement">
+            
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary mt-5">Se connecter</button>
+                    <a href="{{ path('app_home') }}" class="btn btn-outline-light mt-3 text-decoration-none">Retour à l'accueil</a>
+                </div>
+            </div>
+        </form>
 
-        <input type="hidden" name="_target_path" value="/evenement">
+    </div>
 
-        <button type="submit">Se connecter</button>
-    </form>
 {% endblock %}
