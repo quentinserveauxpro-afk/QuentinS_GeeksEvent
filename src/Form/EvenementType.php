@@ -39,11 +39,11 @@ class EvenementType extends AbstractType
             ->add('adresse')
             ->add('organisateur', EntityType::class, [
                 'class' => Organisateur::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
             ])
             ->add('activites', EntityType::class, [
                 'class' => Activite::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
                 'multiple' => true,
             ])
         ;

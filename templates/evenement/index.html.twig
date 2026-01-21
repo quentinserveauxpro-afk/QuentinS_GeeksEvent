@@ -8,7 +8,11 @@
     <div class="container mb-4">
         {{ form_start(form, {attr: {class: 'mb-4', 'data-turbo': 'true'}}) }}
             <div>
-                {{ form_widget(form, {attr: {class: 'form-control', autofocus: true}}) }}
+                {{ form_row(form.search, {
+                    attr: {class: 'form-control', autofocus: true},
+                    label: 'Rechercher un évènement',
+                    label_attr: {'style': 'font-family: Ubuntu; color: white;'},
+                }) }}
                 <button class="btn btn-dark mt-4" type="submit">Rechercher</button>
             </div>
         {{ form_end(form) }}

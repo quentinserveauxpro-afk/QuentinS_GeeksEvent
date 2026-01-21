@@ -21,8 +21,6 @@ final class EvenementController extends AbstractController
         $form = $this->createFormBuilder(null, ['method' => 'GET'])
             ->add('search', SearchType::class,[
                 'required' => false,
-                'label' => 'Filtre',
-                'attr' => ['placeholder' => 'Chercher un évènement'],
             ])
             ->getForm();
 

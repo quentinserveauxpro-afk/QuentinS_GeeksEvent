@@ -28,6 +28,8 @@ class OrganisateurRegistrationController extends AbstractController
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
+            $user->setRoles(['ROLE_ORGANISATEUR']);
+
             $entityManager->persist($user);
             $entityManager->flush();
 

@@ -1,11 +1,77 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Evenement{% endblock %}
+{% block title %}Nouvel Evènement{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        .register-card {
+            background-color: #FFC9D2;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-radius: 45px;
+            box-shadow: 0 4px 8px;
+            margin-right: 150px;
+            margin-left: 150px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Evenement</h1>
 
-    {{ include('evenement/_form.html.twig') }}
+    <header class="text-center p-1 mb-4">
+        <h1 class="my-5" style="font-family: Bungee; color: rgb(255, 255, 255);">Créer votre évènement</h1>
+    </header>
 
-    <a href="{{ path('app_evenement_index') }}">back to list</a>
+    <main>
+        {% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+        <div class="register-card">
+
+        {{ form_start(form, {'attr': {'class': 'row justify-content-center'}}) }}
+
+            <div class="col-md-6 d-grid gap-2">
+                {{ form_row(form.nom, {
+                    label: 'Nom', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                }) }}
+                {{ form_row(form.type, {
+                    label: 'Type', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                }) }}
+                {{ form_row(form.date, {
+                    label: 'Date', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                }) }}
+                {{ form_row(form.localisation, {
+                    label: 'Localisation', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                }) }}
+                {{ form_row(form.horaires, {
+                    label: 'Horaires', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                }) }}
+                {{ form_row(form.adresse, {
+                    label: 'Adresse', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                }) }}
+                {{ form_row(form.organisateur, {
+                    label: 'Organisateur', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                }) }}
+                {{ form_row(form.activites, {
+                    label: 'Activités', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                }) }}
+            
+                <button class="btn btn-primary">{{ button_label|default('Créer') }}</button>
+                <a href="{{ path('app_evenement_index') }}" class="btn btn-outline-dark">Retour à la liste</a>
+            </div>
+
+        {{ form_end(form) }}
+
+        </div>
+    </main>
+
 {% endblock %}
