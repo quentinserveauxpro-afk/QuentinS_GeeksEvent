@@ -2,10 +2,26 @@
 
 {% block title %}Profil index{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        .login-card {
+            background-color: #FFC9D2;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-radius: 45px;
+            box-shadow: 0 4px 8px;
+            margin-right: 150px;
+            margin-left: 150px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
 
-    <header>
-        <h1>Profil index</h1>
+    <header class="text-center p-1 mb-4">
+        <h1 class="my-5" style="font-family: Bungee; color: rgb(255, 255, 255);">Profil index</h1>
     </header>
 
     <div class="container">
@@ -16,7 +32,8 @@
                     <th>Id</th>
                     <th>Pdp</th>
                     <th>Bio</th>
-                    <th>actions</th>
+                    <th>Utilisateur</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,9 +42,9 @@
                     <td>{{ profil.id }}</td>
                     <td>{{ profil.pdp }}</td>
                     <td>{{ profil.bio }}</td>
+                    <td>{{ profil.utilisateur.nom }}</td>
                     <td>
-                        <a href="{{ path('app_profil_show', {'id': profil.id}) }}">show</a>
-                        <a href="{{ path('app_profil_edit', {'id': profil.id}) }}">edit</a>
+                        <a href="{{ path('app_profil_show', {'id': profil.id}) }}" class="btn btn-outline-dark">Détails</a>
                     </td>
                 </tr>
             {% else %}
@@ -38,7 +55,9 @@
             </tbody>
         </table>
 
+        <a href="{{ path('app_profil_new') }}" class="btn btn-primary">Créer un profil</a>
+        <a href="{{ path('app_evenement_index') }}" class="btn btn-dark">Revenir aux évènements</a>
+
     </div>
 
-    <a href="{{ path('app_profil_new') }}">Create new</a>
 {% endblock %}
