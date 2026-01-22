@@ -23,4 +23,13 @@ final class LoginController extends AbstractController
             'error' => $error,
         ]);
     }
+
+    #[Route('/logout', name: 'app_logout')]
+    public function logout(Security $security): Response
+    {
+        $response = $security->logout();
+        $response = $security->logout(false);
+
+        return $this->redirectToRoute('app_home');
+    }
 }

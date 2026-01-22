@@ -6,8 +6,6 @@
     <style>
         .register-card {
             background-color: #FFC9D2;
-            padding-top: 20px;
-            padding-bottom: 20px;
             border-radius: 45px;
             box-shadow: 0 4px 8px;
             margin-right: 150px;
@@ -33,7 +31,7 @@
         {% form_theme registrationForm 'bootstrap_5_layout.html.twig' %}
     
         {{ form_start(registrationForm, {'attr': {'class': 'row justify-content-center'}}) }}
-            <div class="col-md-6 d-grid gap-2">
+            <div class="col-md-6 d-grid gap-2 p-5">
                 {{ form_row(registrationForm.nom, {
                     label: 'Nom', 
                     label_attr: {'style': 'font-family: Ubuntu;'
