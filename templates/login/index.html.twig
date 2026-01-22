@@ -27,11 +27,11 @@
         <h1 class="my-5" style="font-family: Bungee; color: rgb(255, 255, 255);">Ravi de vous revoir!</h1>
     </header>
 
-    <div class="login-card">
+    <div class="login-card mx-auto" style="width: 30%;">
     
         <form action="{{ path('app_login') }}" method="post">
 
-            <div class="col-md-6 d-grid gap-2 p-5">
+            <div class="d-grid gap-2 p-5">
                 <label for="username" class="form-label" style="font-family: Ubuntu;">Email:</label>
                 <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control" required>
         

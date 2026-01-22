@@ -3,44 +3,51 @@
 {% block title %}Evenement{% endblock %}
 
 {% block body %}
-    <h1>Evenement</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ evenement.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ evenement.nom }}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ evenement.type }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Localisation</th>
-                <td>{{ evenement.localisation }}</td>
-            </tr>
-            <tr>
-                <th>Horaires</th>
-                <td>{{ evenement.horaires ? evenement.horaires|date('H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Adresse</th>
-                <td>{{ evenement.adresse }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="container">
 
-    <a href="{{ path('app_evenement_index') }}">back to list</a>
+        <header class="mt-3">
+            <a href="/logout" class="btn btn-outline-light text-decoration-none">Se déconnecter</a>
+        </header>
 
-    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
+        <div class="card p-3 mt-5">
 
-    {{ include('evenement/_delete_form.html.twig') }}
+    
+            <h1 class="card-title mb-4" style="font-family: Bungee;">{{ evenement.nom }}</h1>
+
+            <h2 class="card-subtitle mb-4" style="font-family: Ubuntu; font-weight: 500px;">{{ evenement.organisateur.nom }}</h2>
+
+            <hr>
+    
+            <div class="card-body">
+    
+                <p style="font-family: Ubuntu;"><strong>Type:</strong> {{ evenement.type }}</p>
+                <p><strong>Date:</strong> {{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</p>
+                <p><strong>Localisation:</strong> {{ evenement.localisation }}</p>
+                <p><strong>Horaires:</strong> {{ evenement.horaires ? evenement.horaires|date('H:i:s') : '' }}</p>
+                <p><strong>Adresse:</strong> {{ evenement.adresse }}</p>
+                <p></p>
+                <p class="mb-5">
+                    <strong>Activités:</strong>
+                        {% for activite in evenement.activites %}
+                            {{ activite.nom }} -
+                        {% endfor %}
+                    </p>
+    
+                <a href="{{ path('app_evenement_index') }}" class="btn btn-outline-dark">Revenir à la liste</a>
+    
+                {% if is_granted('ROLE_ORGANISATEUR') %}
+                    <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}" class="btn btn-dark">Modifier</a>
+    
+                    <a href="{{ path('app_evenement_delete', {'id': evenement.id}) }}" class="btn btn-danger">Supprimer</a>
+                {% endif %}
+
+                
+            </div>
+    
+        </div>
+
+    </div>
+
+
 {% endblock %}

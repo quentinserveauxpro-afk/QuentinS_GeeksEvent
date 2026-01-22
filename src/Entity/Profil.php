@@ -22,14 +22,14 @@ class Profil
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $bio = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Utilisateur $utilisateur = null;
-
     /**
      * @var Collection<int, Activite>
      */
     #[ORM\ManyToMany(targetEntity: Activite::class, inversedBy: 'profils')]
     private Collection $preferences;
+
+    #[ORM\OneToOne(mappedBy: 'profil', cascade: ['persist', 'remove'])]
+    private ?Utilisateur $utilisateur = null;
 
     public function __construct()
     {
@@ -65,18 +65,6 @@ class Profil
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?Utilisateur $utilisateur): static
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Activite>
      */
@@ -97,6 +85,28 @@ class Profil
     public function removePreference(Activite $preference): static
     {
         $this->preferences->removeElement($preference);
+
+        return $this;
+    }
+
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($utilisateur === null && $this->utilisateur !== null) {
+            $this->utilisateur->setProfil(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($utilisateur !== null && $utilisateur->getProfil() !== $this) {
+            $utilisateur->setProfil($this);
+        }
+
+        $this->utilisateur = $utilisateur;
 
         return $this;
     }

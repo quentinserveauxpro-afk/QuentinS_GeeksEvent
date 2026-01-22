@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Profil;
+use App\Entity\Utilisateur;
 use App\Form\ProfilType;
 use App\Repository\ProfilRepository;
 use Doctrine\ORM\EntityManagerInterface;

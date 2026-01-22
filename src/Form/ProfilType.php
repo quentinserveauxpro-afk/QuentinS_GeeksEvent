@@ -5,10 +5,11 @@ namespace App\Form;
 use App\Entity\Activite;
 use App\Entity\Profil;
 use App\Entity\Utilisateur;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ProfilType extends AbstractType
 {
@@ -23,8 +24,9 @@ class ProfilType extends AbstractType
             ])
             ->add('preferences', EntityType::class, [
                 'class' => Activite::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
                 'multiple' => true,
+                'expanded' => true,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Enregistrer',

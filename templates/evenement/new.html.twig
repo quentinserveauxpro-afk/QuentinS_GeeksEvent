@@ -25,11 +25,11 @@
     <main>
         {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-        <div class="register-card">
+        <div class="register-card mx-auto" style="width: 30%;">
 
         {{ form_start(form, {'attr': {'class': 'row justify-content-center'}}) }}
 
-            <div class="col-md-6 d-grid gap-2 p-5">
+            <div class="d-grid gap-2 p-5">
                 {{ form_row(form.nom, {
                     label: 'Nom', 
                     label_attr: {'style': 'font-family: Ubuntu;'}
@@ -58,6 +58,9 @@
                     label: 'Organisateur', 
                     label_attr: {'style': 'font-family: Ubuntu;'}
                 }) }}
+
+                <hr>
+
                 {{ form_row(form.activites, {
                     label: 'Activités', 
                     label_attr: {'style': 'font-family: Ubuntu;'}

@@ -4,9 +4,10 @@
 
 {% block body %}
 
-    <header class="container">
+    <header class="container mt-3 mb-5">
+        <a href="/profil" class="btn btn-dark text-decoration-none">Consulter mon profil</a>
+        <a href="/logout" class="btn btn-outline-light text-decoration-none">Se déconnecter</a>
         <h1 class="text-center my-4" style="font-family: Bungee; color: white;">Trouvez votre prochain évènement </h1>
-        <a href="/logout" class="btn btn-dark text-decoration-none">Se déconnecter</a>
     </header>
 
     <main>
@@ -37,28 +38,26 @@
                         <th scope="col">Localisation</th>
                         <th scope="col">Horaires</th>
                         <th scope="col">Adresse</th>
+                        <th scope="col">Organisateur</th>
                         <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                 {% for evenement in evenements %}
-                    <tr>
+                    <tr scope="row">
                         <td>{{ evenement.nom }}</td>
                         <td>{{ evenement.type }}</td>
                         <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
                         <td>{{ evenement.localisation }}</td>
                         <td>{{ evenement.horaires ? evenement.horaires|date('H:i:s') : '' }}</td>
                         <td>{{ evenement.adresse }}</td>
+                        <td>{{ evenement.organisateur.nom }}</td>
                         <td>
-                            <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a>
-                            {% if is_granted('ROLE_ORGANISATEUR') %}
-                                <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
-                                <a href="{{ path('app_evenement_delete', {'id': evenement.id}) }}">Supprimer</a>
-                            {% endif %}
+                            <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}" class="btn btn-sm btn-outline-dark">Détails</a>
                         </td>
                     </tr>
                 {% else %}
-                    <tr>
+                    <tr scope="row">
                         <td colspan="8">Aucun résultats</td>
                     </tr>
                 {% endfor %}
