@@ -19,6 +19,10 @@
                         label_attr: {'style': 'font-family: Ubuntu; color: white;'},
                     }) }}
                     <button class="btn btn-dark mt-4" type="submit">Rechercher</button>
+                    <a href="{{ path('app_evenement_index') }}" class="btn btn-outline-light mt-4">Réinitialiser</a>
+                    {% if is_granted('ROLE_ORGANISATEUR') %}
+                        <a href="{{ path('app_evenement_new') }}" class="btn btn-primary mt-4">Créer un évènement</a>
+                    {% endif %}
                 </div>
             {{ form_end(form) }}
         </div>
@@ -47,7 +51,10 @@
                         <td>{{ evenement.adresse }}</td>
                         <td>
                             <a href="{{ path('app_evenement_show', {'id': evenement.id}) }}">show</a>
-                            <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">edit</a>
+                            {% if is_granted('ROLE_ORGANISATEUR') %}
+                                <a href="{{ path('app_evenement_edit', {'id': evenement.id}) }}">Modifier</a>
+                                <a href="{{ path('app_evenement_delete', {'id': evenement.id}) }}">Supprimer</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% else %}

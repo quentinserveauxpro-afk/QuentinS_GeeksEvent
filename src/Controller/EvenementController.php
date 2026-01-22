@@ -31,18 +31,20 @@ final class EvenementController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $search = $form->get('search')->getData();
                 if ($search) {
-                    $qb->andWhere('e.nom LIKE :search
-                                           OR e.type LIKE :search
-                                           OR e.localisation LIKE :search
-                                           OR e.organisateur LIKE :search')
+                    $qb->leftJoin('e.organisateur', 'o')
+                        ->andWhere('e.nom LIKE :search OR 
+                                    e.type LIKE :search OR 
+                                    e.localisation LIKE :search OR 
+                                    o.nom LIKE :search'
+                                    )
                         ->setParameter('search', '%' . $search . '%');
                 }
-            } 
+            }
 
             $evenements = $qb->getQuery()->getResult();
 
         return $this->render('evenement/index.html.twig', [
-            'evenements' => $repo->findAll(),
+            'evenements' => $evenements,
             'form' => $form,
         ]);
     }

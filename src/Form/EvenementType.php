@@ -24,12 +24,12 @@ class EvenementType extends AbstractType
             ])
             ->add('type', ChoiceType::class, [
                 'choices'  => [
-                    'Gaming & E-sport' => 'g&es',
-                    'Manga & Japon' => 'm&j',
-                    'Rétro-gaming' => 'rg',
-                    'Fantasy & Médiéval' => 'f&m',
-                    'Technologie & Innovation' => 't&i',
-                    'Soirées geeks & communautaires' => 's&c',
+                    'Gaming & E-sport' => 'Gaming & E-sport',
+                    'Manga & Japon' => 'Manga & Japon',
+                    'Rétro-gaming' => 'Rétro-gaming',
+                    'Fantasy & Médiéval' => 'Fantasy & Médiéval',
+                    'Technologie & Innovation' => 'Technologie & Innovation',
+                    'Soirées geeks & communautaires' => 'Soirées geeks & communautaires',
                 ],
                 'label' => 'Type d\'événement',
             ])
