@@ -2,12 +2,61 @@
 
 {% block title %}Edit Profil{% endblock %}
 
+{% block stylesheets %}
+    <style>
+        .register-card {
+            background-color: #FFC9D2;
+            border-radius: 45px;
+            box-shadow: 0 4px 8px;
+            margin-right: 150px;
+            margin-left: 150px;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-    <h1>Edit Profil</h1>
 
-    {{ include('profil/_form.html.twig', {'button_label': 'Update'}) }}
+    <header class="text-center p-1 mb-4">
+        <h1 class="my-5" style="font-family: Bungee; color: rgb(255, 255, 255);">Modifier votre Profil</h1>
+    </header>
 
-    <a href="{{ path('app_profil_index') }}">back to list</a>
+    <main>
+
+        {% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+        <div class="register-card mx-auto" style="width: 30%;">
+    
+            
+            {{ form_start(form, {'attr': {'class': 'row justify-content-center'}}) }}
+                <div class="d-grid gap-2 p-5">
+
+                    {{ form_row(form.pdp, {
+                    label: 'Photo de profil', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                    }) }}
+                    {{ form_row(form.bio, {
+                    label: 'Bio', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                    }) }}
+                    {{ form_row(form.utilisateur, {
+                    label: 'Utilisateur', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                    }) }}
+                    {{ form_row(form.preferences, {
+                    label: 'Préferences', 
+                    label_attr: {'style': 'font-family: Ubuntu;'}
+                    }) }}
+
+                    <button class="btn btn-primary">{{ button_label|default('Modifier') }}</button>
+                    <a href="{{ path('app_profil_index') }}" class="btn btn-dark">Liste des profils</a>
+                    <a href="{{ path('app_evenement_index') }}" class="btn btn-outline-dark">Retour aux évènements</a>
+
+                </div>
+            {{ form_end(form) }}
+
+    </main>
 
     {{ include('profil/_delete_form.html.twig') }}
 {% endblock %}

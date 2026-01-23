@@ -6,15 +6,17 @@
 
     <header class="container mt-3 mb-5">
 
-        {% if app.user %}
+        {# {% if app.user %}
 
-            {% if utilisateur.profil_id is defined and utilisateur.profil_id is not null %}
+            {% if user.profil_id is defined and user.profil_id is not null %}
                 <a href="/profil/{id}" class="btn btn-dark text-decoration-none">Consulter mon profil</a>
             {% else %}
                 <a href="/profil/new" class="btn btn-dark text-decoration-none">Consulter mon profil</a>
             {% endif %}
 
-        {% endif %}
+        {% endif %} #}
+
+        <a href="/profil" class="btn btn-dark text-decoration-none">Consulter mon profil</a>
 
         <a href="/logout" class="btn btn-outline-light text-decoration-none">Se déconnecter</a>
         <h1 class="text-center my-4" style="font-family: Bungee; color: white;">Trouvez votre prochain évènement </h1>
